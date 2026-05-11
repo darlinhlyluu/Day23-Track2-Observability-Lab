@@ -27,6 +27,13 @@ scrape_configs:
     static_configs:
       - targets: ['otel-collector:8888']
 
+  # Day 16-22 integration stubs so the cross-day dashboard renders without
+  # requiring earlier labs to be running on the host.
+  - job_name: 'node-day16-stub'
+    static_configs:
+      - targets: ['integration-stubs:9105']
+    metrics_path: /metrics
+
   # Day 19 vector-store integration (optional, see §05)
   # Uncomment + set DAY19_QDRANT_URL in .env
   # - job_name: 'day19-qdrant'

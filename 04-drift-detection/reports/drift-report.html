@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Day 23 Drift Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; color: #1f2937; }
+    table { border-collapse: collapse; width: 100%; max-width: 920px; }
+    th, td { border: 1px solid #d1d5db; padding: 0.55rem 0.7rem; text-align: right; }
+    th:first-child, td:first-child, th:last-child, td:last-child { text-align: left; }
+    th { background: #f3f4f6; }
+  </style>
+</head>
+<body>
+  <h1>Day 23 Drift Report</h1>
+  <p>PSI greater than 0.2 is flagged as drift; 0.1-0.2 is moderate.</p>
+  <table>
+    <thead><tr><th>Feature</th><th>PSI</th><th>KL</th><th>KS stat</th><th>KS p-value</th><th>Drift</th></tr></thead>
+    <tbody>
+<tr><td>prompt_length</td><td>3.2419</td><td>2.2987</td><td>0.704</td><td>0.0</td><td>yes</td></tr>
+<tr><td>embedding_norm</td><td>0.0119</td><td>0.054</td><td>0.046</td><td>0.241025</td><td>no</td></tr>
+<tr><td>response_length</td><td>0.0104</td><td>0.0321</td><td>0.036</td><td>0.547248</td><td>no</td></tr>
+<tr><td>response_quality</td><td>8.5887</td><td>18.5953</td><td>0.938</td><td>0.0</td><td>yes</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

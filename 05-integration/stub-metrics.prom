@@ -1,0 +1,16 @@
+# Static Prometheus exposition for the Day 16-22 integration dashboard.
+# This lets the lab render cross-day panels even when prior-day services are
+# not running locally.
+
+airflow_dag_run_duration_seconds_bucket{dag_id="day17_pipeline",le="10"} 2
+airflow_dag_run_duration_seconds_bucket{dag_id="day17_pipeline",le="30"} 8
+airflow_dag_run_duration_seconds_bucket{dag_id="day17_pipeline",le="60"} 12
+airflow_dag_run_duration_seconds_bucket{dag_id="day17_pipeline",le="120"} 12
+airflow_dag_run_duration_seconds_bucket{dag_id="day17_pipeline",le="+Inf"} 12
+airflow_dag_run_duration_seconds_sum{dag_id="day17_pipeline"} 415
+airflow_dag_run_duration_seconds_count{dag_id="day17_pipeline"} 12
+
+spark_application_active{app="day18_lakehouse"} 1
+day19_qdrant_collections 3
+day20_llamacpp_tokens_per_second 24
+day22_dpo_eval_pass_rate 0.91

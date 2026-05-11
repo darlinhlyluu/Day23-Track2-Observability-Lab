@@ -58,6 +58,17 @@ services:
       SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL:-https://hooks.slack.com/services/REPLACE/ME}
     networks: [obs]
 
+  discord-bridge:
+    image: python:3.12-slim
+    container_name: day23-discord-bridge
+    working_dir: /app
+    environment:
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+    volumes:
+      - ./02-prometheus-grafana/alertmanager/discord_bridge.py:/app/discord_bridge.py:ro
+    command: ["python", "discord_bridge.py"]
+    networks: [obs]
+
   grafana:
     image: grafana/grafana:11.3.0
     container_name: day23-grafana
@@ -111,6 +122,15 @@ services:
     command: ["--config=/etc/otelcol-contrib/config.yaml"]
     depends_on:
       - jaeger
+    networks: [obs]
+
+  integration-stubs:
+    image: python:3.12-slim
+    container_name: day23-integration-stubs
+    working_dir: /stub
+    volumes:
+      - ./05-integration/stub-metrics.prom:/stub/metrics:ro
+    command: ["python", "-m", "http.server", "9105", "--bind", "0.0.0.0"]
     networks: [obs]
 
 volumes:

@@ -51,7 +51,7 @@ GPU_UTIL = Gauge(
 tracer = trace.get_tracer(__name__)
 
 
-def setup_otel() -> None:
+def setup_otel(app) -> None:
     """Configure OTLP trace export + FastAPI auto-instrumentation."""
     resource = Resource.create(
         {
@@ -69,10 +69,8 @@ def setup_otel() -> None:
         BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint, insecure=True))
     )
     trace.set_tracer_provider(provider)
-    # Auto-instrument FastAPI handlers (creates server spans for every route)
-    from fastapi import FastAPI  # local import: only needed at setup
-
-    FastAPIInstrumentor().instrument()
+    # Auto-instrument FastAPI handlers (creates server spans for every route).
+    FastAPIInstrumentor.instrument_app(app)
     _configure_logging()
 
 
